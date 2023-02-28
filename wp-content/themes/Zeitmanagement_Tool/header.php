@@ -25,7 +25,25 @@
 		<!-- header -->
 		<header class="header clear" role="banner">
 
-		
+			<div class="nav flex-column sidebar">
+						
+				<nav>
+
+					<?php 	
+
+						wp_nav_menu(
+							array(
+							'menu' => 'main-menu',
+							'container' => '',
+							'menu_class' => 'navbar-nav',
+							)
+						);
+						
+					?>
+					
+				</nav>
+
+			</div>
 
 		</header>
 		<!-- /header -->

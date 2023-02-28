@@ -18,13 +18,13 @@
 
 /**  MySQL Einstellungen - diese Angaben bekommst du von deinem Webhoster. */
 /**  Ersetze database_name_here mit dem Namen der Datenbank, die du verwenden möchtest. */
-define('DB_NAME', 'zeitmanagement_tool');
+define('DB_NAME', 'database_name_here');
 
 /** Ersetze username_here mit deinem MySQL-Datenbank-Benutzernamen */
-define('DB_USER', 'root');
+define('DB_USER', 'username_here');
 
 /** Ersetze password_here mit deinem MySQL-Passwort */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'password_here');
 
 /** Ersetze localhost mit der MySQL-Serveradresse */
 define('DB_HOST', 'localhost');
