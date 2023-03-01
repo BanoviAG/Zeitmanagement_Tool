@@ -1,5 +1,4 @@
-<?php get_header(); 
-?>
+<?php /* Template Name: Benutzer verwalten */ get_header(); ?>
 
 <div id="primary" class="content-area">
 
