@@ -1,6 +1,5 @@
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">
-
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<title><?php wp_title(''); ?><?php if (wp_title('', false)) {
@@ -31,13 +30,21 @@
 
 					<?php 	
 
-						wp_nav_menu(
-							array(
-							'menu' => 'main-menu',
-							'container' => '',
-							'menu_class' => 'navbar-nav',
-							)
-						);
+						if ( is_user_logged_in() ) {
+							
+							wp_nav_menu(
+								array(
+								'menu' => 'main-menu',
+								'container' => '',
+								'menu_class' => 'navbar-nav',
+								)
+							);
+
+						} else {
+							
+
+
+						}
 						
 					?>
 					
