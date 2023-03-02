@@ -36,7 +36,9 @@ function zeitmanagement_tool()
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__('Primary', 'zeitmanagement_tool'),
+				'menu-1' => esc_html__('Main', 'zeitmanagement_tool'),
+				'menu-2' => esc_html__('Admin', 'zeitmanagement_tool'),
+				'menu-3' => esc_html__('Superadmin', 'zeitmanagement_tool'),
 			)
 		);
 
@@ -171,3 +173,68 @@ function redirect_login_page() {
 }
 
 add_action('init','redirect_login_page');
+
+
+add_role(
+    '_administrator', //  System name of the role.
+    __( 'Administrator'  ), // Display name of the role.
+    array(
+        'read'  => true,
+        'delete_posts'  => true,
+        'delete_published_posts' => true,
+        'edit_posts'   => true,
+        'publish_posts' => true,
+        'upload_files'  => true,
+        'edit_pages'  => true,
+        'edit_published_pages'  =>  true,
+        'publish_pages'  => true,
+        'delete_published_pages' => false, // This user will NOT be able to  delete published pages.
+    )
+);
+
+add_role(
+    'mitarbeiter', //  System name of the role.
+    __( 'Mitarbeiter'  ), // Display name of the role.
+    array(
+        'read'  => true,
+        'delete_posts'  => true,
+        'delete_published_posts' => true,
+        'edit_posts'   => true,
+        'publish_posts' => true,
+        'upload_files'  => true,
+        'edit_pages'  => true,
+        'edit_published_pages'  =>  true,
+        'publish_pages'  => true,
+        'delete_published_pages' => false, // This user will NOT be able to  delete published pages.
+    )
+);
+
+add_action('admin_menu', 'remove_built_in_roles');
+
+function remove_built_in_roles() {
+    global $wp_roles;
+
+    $roles_to_remove = array('subscriber', 'contributor', 'author', 'editor', 'staff_member', 'admin', 'Administrator');
+
+    foreach ($roles_to_remove as $role) {
+        if (isset($wp_roles->roles[$role])) {
+            $wp_roles->remove_role($role);
+        }
+    }
+}
+
+function change_role_name() {
+    global $wp_roles;
+
+    if ( ! isset( $wp_roles ) )
+        $wp_roles = new WP_Roles();
+
+    //You can list all currently available roles like this...
+    //$roles = $wp_roles->get_names();
+    //print_r($roles);
+
+    //You can replace "administrator" with any other role "editor", "author", "contributor" or "subscriber"...
+    $wp_roles->roles['administrator']['name'] = 'Super-Administrator';
+    $wp_roles->role_names['administrator'] = 'Super-Administrator';           
+}
+add_action('init', 'change_role_name');

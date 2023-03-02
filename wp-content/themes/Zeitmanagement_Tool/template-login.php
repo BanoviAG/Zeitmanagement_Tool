@@ -16,8 +16,8 @@ if($_POST){
         'user_pass' => $password
     );
     $result = wp_insert_user($user_data);
-    $query = "UPDATE wp_users SET arbeitsumfang = 100 WHERE user_email = '$email'";
-    $query_run = mysqli_query($con, $query);
+    $query_registerUser = "UPDATE wp_users SET arbeitsumfang = 100 WHERE user_email = '$email'";
+    $query_run = mysqli_query($con, $query_registerUser);
 
 }
 
