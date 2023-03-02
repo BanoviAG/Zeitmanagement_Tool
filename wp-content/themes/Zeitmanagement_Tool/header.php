@@ -1,6 +1,5 @@
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">
-
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<title><?php wp_title(''); ?><?php if (wp_title('', false)) {
@@ -12,6 +11,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="<?php bloginfo('description'); ?>">
+	<link rel="stylesheet" href="https://use.typekit.net/tke5rpr.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<?php wp_head(); ?>
 
@@ -31,16 +32,37 @@
 
 					<?php 	
 
-						wp_nav_menu(
-							array(
-							'menu' => 'main-menu',
-							'container' => '',
-							'menu_class' => 'navbar-nav',
-							)
-						);
-						
+						if (current_user_can('administrator')){
+							wp_nav_menu(
+								array(
+									'menu' => 'superadmin-menu',
+									'container' => '',
+									'menu_class' => 'navbar-nav',
+								)
+							);
+						} 
+
+						else if (current_user_can('_administrator')){
+								wp_nav_menu(
+								array(
+									'menu' => 'admin-menu',
+									'container' => '',
+									'menu_class' => 'navbar-nav',
+								)
+							);
+						} 
+
+						else {
+								wp_nav_menu(
+								array(
+									'menu' => 'main-menu',
+									'container' => '',
+									'menu_class' => 'navbar-nav',
+								)
+						);}
+
 					?>
-					
+
 				</nav>
 
 			</div>

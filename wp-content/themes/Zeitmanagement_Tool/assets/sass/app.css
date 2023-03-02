@@ -4101,3 +4101,10 @@ a {
   color: #E3E7D3;
   text-decoration: none;
   background-color: transparent; }
+
+i {
+  color: black; }
+
+.text-link {
+  color: black;
+  text-decoration: none; }

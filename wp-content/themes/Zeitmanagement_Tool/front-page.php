@@ -1,4 +1,5 @@
-<?php get_header(); 
+<?php
+require ('template-parts/validation/validateUser.php')
 ?>
 
 <div id="primary" class="content-area">
