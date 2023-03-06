@@ -8,7 +8,7 @@ require ('template-parts/validation/validateUser.php')
 
         <div class="container">
 
-            <div class="row">
+            <div class="row pt-5">
 
                 <div class="col-8">
 

@@ -62,7 +62,7 @@
         
     });
 
-        $('#start').submit(function(e){
+        $('#start, #pause').submit(function(e){
             e.preventDefault();
         })
         
@@ -78,6 +78,19 @@
                 
             });
          });
+
+         $(function(){
+            $('#pause').click(function(e) {  
+                var pause = 1;
+                $.ajax
+                ({ 
+                    url: 'wp-content/themes/Zeitmanagement_Tool/functions/timestamp.php',
+                    data: {pause},
+                    method: 'post'
+               });
+               
+           });
+        });
         
     });
 

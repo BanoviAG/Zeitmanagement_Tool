@@ -9,4 +9,9 @@ if(isset($_POST['start'])) {
     $query_run = mysqli_query($con, $query_startTimer);
 
 }
+
+if(isset($_POST['pause'])) {
+    $query_stopTimer = "UPDATE timestamps SET check_out = now() WHERE user = '$current_user->user_login' ORDER BY check_in DESC LIMIT 1";
+    $query_run = mysqli_query($con, $query_stopTimer);
+}
 ?>
