@@ -91,8 +91,16 @@
                
            });
         });
-        
+
     });
 
 
 })(jQuery, this);
+
+function editContact() {
+    document.getElementById('editContact_form').style.display = "block";
+}
+
+function editUser() {
+    document.getElementById('editUser_form').style.display = "block";
+}

@@ -39,7 +39,7 @@ require 'functions/deleteContacts.php';
                             '</th>';
 
                     foreach ($contacts as $contact){
-                        echo '<tr>', '<td>', $contact->id, '</td>', '<td>', $contact->name, '</td>', '<td>', '<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>', '</td>', '<td>', '<a href="../wp-content/themes/Zeitmanagement_Tool/functions/deleteContacts.php?delete=' . $contact->id . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', '</td>', '<td>', '<i class="fa fa-check" aria-hidden="true"></i>', '</td>', '</tr>';
+                        echo '<tr>', '<td>', $contact->id, '</td>', '<td>', $contact->name, '</td>', '<td>', '<a href="#" onclick="editContact();"><i class="fa fa-pencil" aria-hidden="true"></i></a>', '</td>', '<td>', '<a href="../wp-content/themes/Zeitmanagement_Tool/functions/deleteContacts.php?delete=' . $contact->id . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', '</td>', '<td>', '<i class="fa fa-check" aria-hidden="true"></i>', '</td>', '</tr>';
                     }
                     echo    '</table>';
                     ?>
@@ -47,6 +47,44 @@ require 'functions/deleteContacts.php';
                 </div>
 
                 <div class="col-4">
+
+                    <div id="editContact_form" style="display:none;">
+                        
+                        <form action="../wp-content/themes/Zeitmanagement_Tool/functions/editContacts.php?edit=<?php echo $contact->id; ?>" name="editContact_form" id="editContact_form" method="post">
+                            
+                                <p>
+                                    
+                                    <label for="txtCompany">Firma</label>
+                                    <div><input type="text" id="txtCompany" name="txtCompany" placeholder="Firma"></div>
+                                    
+                                </p>
+
+                                <p>
+
+                                    <label for="txtAdress">Adresse</label>
+                                    <div><input type="text" id="txtAdress" name="txtAdress" placeholder="Adresse"></div>
+
+                                </p>
+
+                                <p>
+
+                                    <label for="txtPlz">Postleitzahl</label>
+                                    <div><input type="text" id="txtPlz" name="txtPlz" placeholder="PLZ"></div>
+
+                                </p>
+
+                                <p>
+
+                                    <label for="txtCity">Stadt</label>
+                                    <div><input type="text" id="txtCity" name="txtCity" placeholder="Stadt"></div>
+
+                                </p>
+                                
+                            <input type="submit" name="editContact_form" id="editContact_form">
+
+                        </form>
+
+                    </div>
 
                 </div>
 
