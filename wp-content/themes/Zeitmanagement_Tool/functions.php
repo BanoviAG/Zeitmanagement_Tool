@@ -13,9 +13,6 @@
 function zeitmanagement_tool()
 	{
 
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support('automatic-feed-links');
-
 		/*
 		 * Let WordPress manage the document title.
 		 * By adding theme support, we declare that this theme does not use a
@@ -41,10 +38,6 @@ function zeitmanagement_tool()
 				'menu-3' => esc_html__('Superadmin', 'zeitmanagement_tool'),
 			)
 		);
-
-		// Add theme support for selective refresh for widgets.
-		add_theme_support('customize-selective-refresh-widgets');
-
 	}
 add_action('after_setup_theme', 'zeitmanagement_tool');
 
@@ -70,37 +63,6 @@ if ( ! function_exists( 'twentytwentytwo_support' ) ) :
 endif;
 
 add_action( 'after_setup_theme', 'twentytwentytwo_support' );
-
-function zeitmanagement_tool_styles()
-{
-	wp_register_style('custom-css', get_template_directory_uri() . '/assets/sass/app.css', array(), '1.0', 'all');
-	wp_enqueue_style('custom-css'); // Enqueue it!
-
-	wp_register_script('script', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0', true);
-	wp_enqueue_script('script');
-
-}
-add_action('wp_enqueue_scripts', 'zeitmanagement_tool_styles');
-
-if ( ! function_exists( 'twentytwentytwo_editor_styles' ) ) :
-
-	/**
-	 * Enqueue editor styles.
-	 *
-	 * @since Twenty Twenty-Two 1.0
-	 *
-	 * @return void
-	 */
-	function twentytwentytwo_editor_styles() {
-
-		// Add styles inline.
-		wp_add_inline_style( 'wp-block-library', twentytwentytwo_get_font_face_styles() );
-
-	}
-
-endif;
-
-add_action( 'admin_init', 'twentytwentytwo_editor_styles' );
 
 if ( ! function_exists( 'twentytwentytwo_get_font_face_styles' ) ) :
 
@@ -161,6 +123,37 @@ if ( ! function_exists( 'twentytwentytwo_preload_webfonts' ) ) :
 endif;
 
 add_action( 'wp_head', 'twentytwentytwo_preload_webfonts' );
+
+function zeitmanagement_tool_styles()
+{
+	wp_register_style('custom-css', get_template_directory_uri() . '/assets/sass/app.css', array(), '1.0', 'all');
+	wp_enqueue_style('custom-css'); // Enqueue it!
+
+	wp_register_script('script', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0', true);
+	wp_enqueue_script('script');
+
+}
+add_action('wp_enqueue_scripts', 'zeitmanagement_tool_styles');
+
+if ( ! function_exists( 'twentytwentytwo_editor_styles' ) ) :
+
+	/**
+	 * Enqueue editor styles.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentytwo_editor_styles() {
+
+		// Add styles inline.
+		wp_add_inline_style( 'wp-block-library', twentytwentytwo_get_font_face_styles() );
+
+	}
+
+endif;
+
+add_action( 'admin_init', 'twentytwentytwo_editor_styles' );
 
 function redirect_login_page() {
     $login_url  = home_url( '/login' );

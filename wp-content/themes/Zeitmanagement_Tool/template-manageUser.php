@@ -17,7 +17,7 @@ require 'template-parts/validation/validateUser.php';
                     <?php
                     if (mysqli_num_rows($result) > 0) {
                         // output data of each row       
-                        echo '<table>',
+                        echo '<table style="width:100%;">',
                                 '<th>',
                                     '<b>Benutzername</b>',
                                 '</th>',
