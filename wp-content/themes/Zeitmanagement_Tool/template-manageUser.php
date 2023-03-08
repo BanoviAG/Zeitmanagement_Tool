@@ -49,7 +49,7 @@ require 'template-parts/validation/validateUser.php';
                                         $row["arbeitsumfang"] , 
                                     "</td>", 
                                     '<td>', 
-                                        '<a href="#" onclick="editUser();"><i class="fa fa-pencil" aria-hidden="true"></i></a>',
+                                        '<a href="../wp-content/themes/Zeitmanagement_Tool/benutzer-verwalten?edit=', $row["ID"], '"', 'onclick="getQueryParam();"><i class="fa fa-pencil" aria-hidden="true"></i></a>',
                                     '</td>',
                                     '<td>', 
                                         '<a href="../wp-content/themes/Zeitmanagement_Tool/functions/getUsers.php?delete=' . $row["user_email"] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
@@ -65,9 +65,14 @@ require 'template-parts/validation/validateUser.php';
 
                 <div class="col-4">
 
+                <?php
+                $id = $_SERVER['QUERY_STRING'];
+                $id = ltrim($id, 'edit=');
+                ?>
+
                     <div id="editUser_form" style="display:none;">
                         
-                        <form action="../wp-content/themes/Zeitmanagement_Tool/functions/editUsers.php?edit=<?php echo $row["user_email"] ?>" name="editUser_form" id="editUser_form" method="post">
+                        <form action="../wp-content/themes/Zeitmanagement_Tool/functions/editUsers.php?edit=<?php echo $id ?>" name="editUser_form" id="editUser_form" method="post">
                             
                             <div class="row">
                                 
