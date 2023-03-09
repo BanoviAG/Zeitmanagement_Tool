@@ -1,13 +1,50 @@
-<?php /* Template Name: Login */ get_header(); 
+<?php /* Template Name: Login */ get_header();
+
 
 // Register
 global $wpdb;
 require ('wp-content/themes/zeitmanagement_tool/template-parts/connection/db-connection.php');
+require('template-parts/validation/validateInput.php');
 if($_POST){
     $username = $wpdb->escape($_POST['username']);
     $email = $wpdb->escape($_POST['email']);
     $password = $wpdb->escape($_POST['password']);
     $ConfPassword = $wpdb->escape($_POST['password2']);
+
+    $query_checkEmail = mysqli_query($con, "SELECT user_email FROM wp_users WHERE user_email = '$email'"); 
+    if(mysqli_num_rows($query_checkEmail)) {
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/login/?error=emailexists';
+                </script>");
+        exit();
+    }
+
+    if(emptyInputSignup($email, $username, $password, $ConfPassword) !== false){
+        
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/login/?error=emptyinput';
+                </script>");
+        exit();
+
+    }
+
+    if(invalidEmail($email) !== false){
+
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/login/?error=invalidemail';
+                </script>");
+        exit();
+
+    }
+
+    if(pwdMatch($password, $ConfPassword) !== false){
+
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/login/?error=passworddontmatch';
+                </script>");
+        exit();
+
+    }
 
     $user_data = array(
         'user_login' => $username,
@@ -18,7 +55,6 @@ if($_POST){
     $result = wp_insert_user($user_data);
     $query_registerUser = "UPDATE wp_users SET arbeitsumfang = 100 WHERE user_email = '$email'";
     $query_run = mysqli_query($con, $query_registerUser);
-
 }
 
 ?>
@@ -33,7 +69,7 @@ if($_POST){
 
                 <div class="col-8">
 
-                    <form name="register" id="register" method="post">
+                    <form name="register" id="register" method="post" class="mb-5">
                         
                         <h1>Registrieren</h1>
 
@@ -63,7 +99,7 @@ if($_POST){
                             <div class="col-12">
 
                                 <label for="password2">Passwort wiederholen:</label> <br/>
-                                <input type="password" name="password2" id="password2">
+                                <input type="password" name="password2" id="password2"> 
 
                             </div>
     
@@ -76,6 +112,21 @@ if($_POST){
                         </div>
 
                     </form>
+
+                    <?php
+                    if (strpos($_SERVER['REQUEST_URI'], "emptyinput") !== false){
+                        echo '<p class="error">Bitte alle Felder ausfüllen</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "invalidemail") !== false) {
+                        echo '<p class="error">Bitte korrektes E-Mail Format verwenden</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "emailexists") !== false) {
+                        echo '<p class="error">E-Mail-Adresse wird bereits verwendet</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "passworddontmatch") !== false) {
+                        echo '<p class="error">Passwörter stimmen nicht überein</p>';
+                    }
+                    ?>
 
                 </div>
 

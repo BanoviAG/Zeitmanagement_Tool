@@ -3707,3 +3707,6 @@ table.SimpleCalendar {
       color: white; }
   table.SimpleCalendar tbody td.today {
     background: #d2d2d2; }
+
+.error {
+  color: red; }
