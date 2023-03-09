@@ -1,7 +1,7 @@
 <?php
 // Get Users
 $con = mysqli_connect("localhost", "root", "", "zeitmanagement_tool");
-$query_getUsers = "SELECT display_name, user_email, arbeitsumfang FROM wp_users";
+$query_getUsers = "SELECT ID, display_name, user_email, arbeitsumfang FROM wp_users";
 $result = mysqli_query($con, $query_getUsers);
 
 // Delete User

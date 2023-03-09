@@ -1,0 +1,29 @@
+{
+	"name"       : "donatj/simplecalendar",
+	"type"       : "library",
+	"description": "A light, easy to use calendar rendering library",
+	"keywords"   : ["calendar"],
+	"homepage"   : "https://donatstudios.com/SimpleCalendar",
+	"license"    : "MIT",
+	"require"    : {
+		"php"         : ">=5.5.0",
+		"ext-calendar": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*",
+		"ext-dom": "*"
+	},
+	"authors"    : [
+		{
+			"name"    : "Jesse G. Donat",
+			"email"   : "donatj@gmail.com",
+			"homepage": "http://donatstudios.com",
+			"role"    : "Developer"
+		}
+	],
+	"autoload"   : {
+		"psr-4": {
+			"donatj\\": "src/"
+		}
+	}
+}
