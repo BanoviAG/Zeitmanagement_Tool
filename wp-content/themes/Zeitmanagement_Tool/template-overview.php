@@ -15,17 +15,22 @@ require 'vendor/autoload.php';
                 <div class="col-8">
 
                 <?php
+
                 $calendar = new donatj\SimpleCalendar();
 
                 while ($row = mysqli_fetch_array($query_runSecondsWorkedToday, MYSQLI_ASSOC))
                 {
                     $hours = floor($row['total_seconds'] / 3600);
+
                     $minutes = floor(($row['total_seconds'] / 60) % 60);
+
                     $seconds = $row['total_seconds'] % 60;
+
                     $calendar->addDailyHtml("{$hours}:{$minutes}h", "{$row['DATE(`check_in`)']}");
                 }
 
                 $calendar->setWeekDayNames([ 'Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag' ]);
+
                 $calendar->setStartOfWeek('Montag');
 
                 echo $calendar->render();
@@ -37,36 +42,101 @@ require 'vendor/autoload.php';
                 <div class="col-4">
                     <?php
                     $row = mysqli_fetch_array($query_runDatesThisWeek, MYSQLI_ASSOC);
+
+                    echo "<table>",
+                            "<tbody>";
                     if($row['arbeitsumfang'] == 100){
+
                         $soll = 40;
-                        echo 'Diese Woche zu arbeiten: ' . $soll . 'h'; 
+                        echo '<tr>', 
+                                '<td>',
+                                    '<p>Diese Woche zu arbeiten: </p>', 
+                                '</td>', 
+                                "<td>",
+                                    "<p>" . $soll . 'h', '</p>',
+                                '</td>',
+                              '</tr>'; 
                         } 
+
                         else if($row['arbeitsumfang'] == 80) {
+
                             $soll = 32;
-                            echo 'Diese Woche zu arbeiten: ' . $soll . 'h'; 
-                        }
+                            echo '<tr>', 
+                                    '<td>',
+                                        '<p>Diese Woche zu arbeiten: </p>', 
+                                    '</td>', 
+                                    "<td>",
+                                        "<p>" . $soll . 'h', '</p>',
+                                    '</td>',
+                                  '</tr>'; 
+                            } 
+
                         else if ($row['arbeitsumfang'] == 60) {
+
                             $soll = 24;
-                            echo 'Diese Woche zu arbeiten: ' . $soll . 'h'; 
-                        }
+                            echo '<tr>', 
+                                    '<td>',
+                                        '<p>Diese Woche zu arbeiten: </p>', 
+                                    '</td>', 
+                                    "<td>",
+                                        "<p>" . $soll . 'h', '</p>',
+                                    '</td>',
+                                  '</tr>'; 
+                            } 
+
                         else if ($row['arbeitsumfang'] == 40) {
+
                             $soll = 16;
-                            echo 'Diese Woche zu arbeiten: ' . $soll . 'h'; 
-                        }
+                            echo '<tr>', 
+                                    '<td>',
+                                        '<p>Diese Woche zu arbeiten: </p>', 
+                                    '</td>', 
+                                    "<td>",
+                                        "<p>" . $soll . 'h', '</p>',
+                                    '</td>',
+                                  '</tr>'; 
+                            } 
+
                         else {
+
                             $soll = 8;
-                            echo 'Diese Woche zu arbeiten: ' . $soll . 'h'; 
-                        }
+                            echo '<tr>', 
+                                    '<td>',
+                                        '<p>Diese Woche zu arbeiten: </p>', 
+                                    '</td>', 
+                                    "<td>",
+                                        "<p>" . $soll . 'h', '</p>',
+                                    '</td>',
+                                  '</tr>'; 
+                            } 
+                            
+                            $hours = floor($row['SUM(`total_seconds`)'] / 3600);
+                            $minutes = floor(($row['SUM(`total_seconds`)'] / 60) % 60);
+                            ?>
+                            <tr>
+                                <td>
+                                    <p>Bis jetzt gearbeitet: </p>
+                                </td>
+                                <td>
+                                    <p><?php echo $hours . ':' . $minutes . 'h'; ?></p>
+                                </td>
+                            </tr>
+                            <?php
+                            $minutes = $minutes / 100;
+                            $ist = $hours + $minutes;
+                            $output = (float)floor($soll) - (float)($ist);
+                            ?>
+                            <tr>
+                                <td>
+                                    <p>Noch zu arbeiten: </p>
+                                </td>
+                                <td>
+                                    <p><?php echo $output . 'h'; ?></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                         
-                    $hours = floor($row['SUM(`total_seconds`)'] / 3600);
-                    $minutes = floor(($row['SUM(`total_seconds`)'] / 60) % 60);
-                    echo '<br/>' , 'Bis jetzt gearbeitet: ' . $hours . ':' . $minutes . 'h';
-                    echo '<br/>';
-                    $minutes = $minutes / 100;
-                    $ist = $hours + $minutes;
-                    $output = (float)floor($soll) - (float)($ist);
-                    echo 'Noch zu arbeiten: ' . $output . 'h';
-                    ?>
                 </div>
 
             </div>

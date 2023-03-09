@@ -37,7 +37,7 @@ require ('template-parts/validation/validateUser.php')
 
                                 <div class="timer">
 
-                                    <img src="//localhost/Zeitmanagement_Tool/wp-content/uploads/2023/03/clock.gif" width="28%" height="25%">
+                                    <img src="//localhost/Zeitmanagement_Tool/wp-content/uploads/2023/03/MichiUhr3.gif" width="25%" height="25%">
 
                                 </div>
                                 

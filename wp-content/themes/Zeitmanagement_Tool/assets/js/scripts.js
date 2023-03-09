@@ -91,8 +91,16 @@
                
            });
         });
-        
+
     });
 
 
 })(jQuery, this);
+
+function editContact() {
+    document.getElementById('editContact_form').style.display = "block";
+}
+
+if (window.location.href.indexOf("benutzer-verwalten/?edit=") > -1) {
+    document.getElementById('editUser_form').style.display = "block";
+}
