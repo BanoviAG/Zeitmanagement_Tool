@@ -16,9 +16,7 @@ require ('template-parts/validation/validateUser.php')
                     <h1>Willkommen <b><?php echo $current_user->user_login; ?></b></h1>
 
                     <div>
-
-                        
-                        
+         
                         <div>
                             
                             <form id="start">
@@ -37,7 +35,7 @@ require ('template-parts/validation/validateUser.php')
 
                                 <div class="timer">
 
-                                    <img src="//localhost/Zeitmanagement_Tool/wp-content/uploads/2023/03/MichiUhr3.gif" width="25%" height="25%">
+                                    <img src="http://localhost/Zeitmanagement_Tool/wp-content/uploads/2023/03/MichiUhr3.gif" width="25%" height="25%">
 
                                 </div>
                                 

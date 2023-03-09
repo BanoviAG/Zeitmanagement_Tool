@@ -5,7 +5,6 @@
         
         'use strict'; 
         
-        // Timer
         let showTime = document.querySelector("#output");
         let startTimeButton = document.querySelector("#start")
         let pauseTimeButton = document.querySelector("#pause")
@@ -19,13 +18,10 @@
             seconds++;
             localStorage.setItem("stopwatchSeconds", seconds);
             
-            // Stunden
             let hours = Math.floor(seconds / 3600);
 
-            // Minuten
             let minutes = Math.floor((seconds - hours * 3600) / 60);
 
-            // Sekunden
             let secs = Math.floor(seconds % 60);
 
         if (hours < 10) {
@@ -53,7 +49,6 @@
         interval = setInterval(timer, 1000);
     });
 
-    // Pausieren
         pauseTimeButton.addEventListener("click", () => {
             pauseTimeButton.style.display = "none";
             startTimeButton.style.display = "block";
