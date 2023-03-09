@@ -2,16 +2,51 @@
 require 'functions/getUsers.php';
 require 'template-parts/connection/db-connection.php';
 require 'template-parts/validation/validateUser.php';
+require 'template-parts/validation/validateInput.php';
 
 global $wpdb;
 if($_POST){
-    $username = $wpdb->escape($_POST['txtUsername']);
-    $email = $wpdb->escape($_POST['txtEmail']);
-    $password = $wpdb->escape($_POST['txtPassword']);
-    $ConfPassword = $wpdb->escape($_POST['txtConfirmPassword']);
+    $username = $wpdb->escape($_POST['username']);
+    $email = $wpdb->escape($_POST['email']);
+    $password = $wpdb->escape($_POST['password']);
+    $ConfPassword = $wpdb->escape($_POST['password2']);
     $role = $_POST['role'];
     $arbeitsumfang = $_POST['arbeitsumfang'];
 
+    $query_checkEmail = mysqli_query($con, "SELECT user_email FROM wp_users WHERE user_email = '$email'"); 
+    if(mysqli_num_rows($query_checkEmail)) {
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/benutzer-hinzufuegen/?error=emailexists';
+                </script>");
+        exit();
+    }
+
+    if(emptyInputSignup($email, $username, $password, $ConfPassword) !== false){
+        
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/benutzer-hinzufuegen/?error=emptyinput';
+                </script>");
+        exit();
+
+    }
+
+    if(invalidEmail($email) !== false){
+
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/benutzer-hinzufuegen/?error=invalidemail';
+                </script>");
+        exit();
+
+    }
+
+    if(pwdMatch($password, $ConfPassword) !== false){
+
+        echo ("<script LANGUAGE='JavaScript'>
+                window.location.href='http://localhost/Zeitmanagement_Tool/benutzer-hinzufuegen/?error=passworddontmatch';
+                </script>");
+        exit();
+
+    }
         $user_data = array(
             'user_login' => $username,
             'user_email' => $email,
@@ -23,6 +58,7 @@ if($_POST){
         $query_registerUser = "UPDATE wp_users SET arbeitsumfang = $arbeitsumfang WHERE user_email = '$email'";
         $query_run = mysqli_query($con, $query_registerUser);
     }
+
 ?>
 
 <div id="primary" class="content-area">
@@ -39,15 +75,15 @@ if($_POST){
                         
                         <p>
                     
-                            <label for="txtUsername">Benutzername</label>
-                            <div><input type="text" id="txtUsername" name="txtUsername" placeholder="Username"></div>
+                            <label for="username">Benutzername</label>
+                            <div><input type="text" id="username" name="username" placeholder="Username"></div>
                     
                         </p>
                     
                         <p>
                     
-                            <label for="txtEmail">E-Mail-Adresse</label>
-                            <div><input type="email" id="txtEmail" name="txtEmail" placeholder="E-Mail"></div>
+                            <label for="email">E-Mail-Adresse</label>
+                            <div><input type="email" id="email" name="email" placeholder="E-Mail"></div>
                     
                         </p>
                     
@@ -81,20 +117,35 @@ if($_POST){
                     
                         <p>
                     
-                            <label for="txtPassword">Passwort</label>
-                            <div><input type="password" id="txtPassword" name="txtPassword" placeholder="Password"></div>
+                            <label for="password">Passwort</label>
+                            <div><input type="password" id="password" name="password" placeholder="Password"></div>
                     
                         </p>
                     
                         <p>
                     
-                            <label for="txtConfirmPassword">Passwort wiederholen</label>
-                            <div><input type="password" id="txtConfirmPassword" name="txtConfirmPassword" placeholder="Password"></div>
+                            <label for="password2">Passwort wiederholen</label>
+                            <div><input type="password" id="password2" name="password2" placeholder="Password"></div>
                     
                         </p>
                     
                         <input name="Submit" type="submit">
                     </form>
+
+                    <?php
+                    if (strpos($_SERVER['REQUEST_URI'], "emptyinput") !== false){
+                        echo '<p class="error">Bitte alle Felder ausfüllen</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "invalidemail") !== false) {
+                        echo '<p class="error">Bitte korrektes E-Mail Format verwenden</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "emailexists") !== false) {
+                        echo '<p class="error">E-Mail-Adresse wird bereits verwendet</p>';
+
+                    } else if (strpos($_SERVER['REQUEST_URI'], "passworddontmatch") !== false) {
+                        echo '<p class="error">Passwörter stimmen nicht überein</p>';
+                    }
+                    ?>
 
                 </div>
                 

@@ -4,7 +4,7 @@
 // Register
 global $wpdb;
 require ('wp-content/themes/zeitmanagement_tool/template-parts/connection/db-connection.php');
-require('wp-content/themes/zeitmanagement_tool/functions/validateInput.php');
+require('template-parts/validation/validateInput.php');
 if($_POST){
     $username = $wpdb->escape($_POST['username']);
     $email = $wpdb->escape($_POST['email']);
