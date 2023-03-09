@@ -17,7 +17,7 @@ require 'template-parts/validation/validateUser.php';
                     <?php
                     if (mysqli_num_rows($result) > 0) {
                         // output data of each row       
-                        echo '<table>',
+                        echo '<table style="width:100%;">',
                                 '<th>',
                                     '<b>Benutzername</b>',
                                 '</th>',
@@ -49,10 +49,10 @@ require 'template-parts/validation/validateUser.php';
                                         $row["arbeitsumfang"] , 
                                     "</td>", 
                                     '<td>', 
-                                        '<a href="../wp-content/themes/Zeitmanagement_Tool/functions/getUsers.php?delete=' . $row["user_email"] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
+                                        '<a href="../wp-content/themes/Zeitmanagement_Tool/benutzer-verwalten?edit=', $row["ID"], '"', '"><i class="fa fa-pencil" aria-hidden="true"></i></a>',
                                     '</td>',
                                     '<td>', 
-                                        '', 
+                                        '<a href="../wp-content/themes/Zeitmanagement_Tool/functions/getUsers.php?delete=' . $row["ID"] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
                                     '</td>',
                                 "</tr>"; 
                             }
@@ -60,10 +60,132 @@ require 'template-parts/validation/validateUser.php';
                     } else {
                         echo "0 results";
                     }
-                ?>
+                    ?>
                 </div>
-                
+
                 <div class="col-4">
+
+                    <?php
+                    $id = $_SERVER['QUERY_STRING'];
+                    $id = ltrim($id, 'edit=');
+                    ?>
+
+                    <div id="editUser_form" style="display:none;">
+                        
+                        <form action="../wp-content/themes/Zeitmanagement_Tool/functions/editUsers.php?edit=<?php echo $id ?>" name="editUser_form" id="editUser_form" method="post">
+                            
+                            <div class="row">
+                                
+                                <div class="col-12">
+    
+                                    <label for="username">Username:</label> <br/>
+                                    <input type="text" name="username" id="username">
+    
+                                </div>
+    
+                                <div class="col-12 mt-3">
+    
+                                    <label for="email">E-Mail:</label> <br/>
+                                    <input type="email" name="email" id="email">
+    
+                                </div>
+    
+                                <div class="col-12 mt-3">
+    
+                                    <label>Arbeitsumfang</label>
+
+                                    <div>
+
+                                        <select name="arbeitsumfang">
+
+                                            <option value='100'>100%</option>
+
+                                            <option value='80'>80%</option>
+
+                                            <option value='60'>60%</option>
+
+                                            <option value='40'>40%</option>
+
+                                            <option value='20'>20%</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <button type="submit" class="btn btn-primary">Benutzer editieren</button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                <?php
+                $id = $_SERVER['QUERY_STRING'];
+                $id = ltrim($id, 'edit=');
+                ?>
+
+                    <div id="editUser_form" style="display:none;">
+                        
+                        <form action="../wp-content/themes/Zeitmanagement_Tool/functions/editUsers.php?edit=<?php echo $id ?>" name="editUser_form" id="editUser_form" method="post">
+                            
+                            <div class="row">
+                                
+                                <div class="col-12">
+    
+                                    <label for="username">Username:</label> <br/>
+                                    <input type="text" name="username" id="username">
+    
+                                </div>
+    
+                                <div class="col-12 mt-3">
+    
+                                    <label for="email">E-Mail:</label> <br/>
+                                    <input type="email" name="email" id="email">
+    
+                                </div>
+    
+                                <div class="col-12 mt-3">
+    
+                                    <label>Arbeitsumfang</label>
+
+                                    <div>
+
+                                        <select name="arbeitsumfang">
+
+                                            <option value='100'>100%</option>
+
+                                            <option value='80'>80%</option>
+
+                                            <option value='60'>60%</option>
+
+                                            <option value='40'>40%</option>
+
+                                            <option value='20'>20%</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <button type="submit" class="btn btn-primary">Benutzer editieren</button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
