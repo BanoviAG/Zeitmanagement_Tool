@@ -65,6 +65,8 @@
 
 				</nav>
 
+				<a href="localhost/Zeitmanagement_Tool/profil"><i class="fa fa-user" aria-hidden="true"></i></a>
+
 			</div>
 
 		</header>

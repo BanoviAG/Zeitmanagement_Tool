@@ -52,6 +52,29 @@ i {
     height: 100%;
 }
 
+.black {
+	color: black;
+}
+
+.roles {
+	td {
+		border: 1px solid black;
+		height: 50px;
+		padding: 20px;
+	}
+	.center {
+		text-align: center;
+	}
+}
+
+.fa-user {
+	position: absolute;
+	left: 10%;
+	bottom: 5%;
+	color: white;
+	border: 1px solid white;
+	padding: 20px;
+}
 
 table.SimpleCalendar {
 	font-family: Arial;
