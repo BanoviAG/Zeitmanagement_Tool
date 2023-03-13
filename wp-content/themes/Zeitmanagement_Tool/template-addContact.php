@@ -34,7 +34,7 @@ require 'template-parts/validation/validateUser.php';
                             <p>
                                 
                                 <label for="txtPlz">Postleitzahl</label>
-                                <div><input type="text" id="txtPlz" name="txtPlz" placeholder="PLZ"></div>
+                                <div><input type="number" id="txtPlz" name="txtPlz" placeholder="PLZ"></div>
 
                             </p>
                             
